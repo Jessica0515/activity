@@ -1,5 +1,6 @@
 package com.example.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -16,9 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
-    private Context context;
+    private final Context context;
     private List<DataClass> dataList;
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setSearchList(List<DataClass> dataSearchList){
         this.dataList = dataSearchList;
         notifyDataSetChanged();
@@ -44,16 +46,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.recDesc.setText(dataList.get(position).getDataDesc());
         holder.recLang.setText(dataList.get(position).getDataLang());
 
-        holder.recCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("Image", dataList.get(holder.getAdapterPosition()).getDataImage());
-                intent.putExtra("Title", dataList.get(holder.getAdapterPosition()).getDataTitle());
-                intent.putExtra("Desc", dataList.get(holder.getAdapterPosition()).getDataDesc());
-
-                context.startActivity(intent);
-            }
+        holder.recCard.setOnClickListener(view -> {
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("Image", dataList.get(holder.getAdapterPosition()).getDataImage());
+            intent.putExtra("Title", dataList.get(holder.getAdapterPosition()).getDataTitle());
+            intent.putExtra("Desc", dataList.get(holder.getAdapterPosition()).getDataDesc());
+            context.startActivity(intent);
         });
 
     }

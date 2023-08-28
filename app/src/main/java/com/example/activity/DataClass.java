@@ -2,10 +2,10 @@ package com.example.activity;
 
 public class DataClass {
 
-    private String dataTitle;
-    private int dataDesc;
-    private String dataLang;
-    private int dataImage;
+    private final String dataTitle;
+    private final int dataDesc;
+    private final String dataLang;
+    private final int dataImage;
 
     public String getDataTitle() {
         return dataTitle;
